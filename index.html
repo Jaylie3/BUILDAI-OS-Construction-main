@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BuildAI OS | Working Quote System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav shell">
+        <a class="brand" href="#top">
+          <span class="mark"></span>
+          <span>BuildAI OS</span>
+        </a>
+        <ul class="links">
+          <li><a href="#platform">Platform</a></li>
+          <li><a href="#quote-system">Quote system</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+        <a class="button primary" href="https://wa.me/+27780122274">Book demo</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="shell fade">
+          <p class="eyebrow">AI sales system for construction teams</p>
+          <h1>BuildAI OS</h1>
+          <p class="lede">
+            Reply to WhatsApp leads, build polished quotes, follow up automatically, and move projects from inquiry to signed job without chasing every message yourself.
+          </p>
+          <div class="actions">
+            <a class="button light" href="#quote-system">Try the system</a>
+            <a class="button ghost" href="https://wa.me/+27780122274">Talk on WhatsApp</a>
+          </div>
+          <div class="proof">
+            <div>
+              <strong>12 sec</strong>
+              <span>average quote draft</span>
+            </div>
+            <div>
+              <strong>24/7</strong>
+              <span>lead response</span>
+            </div>
+            <div>
+              <strong>3x</strong>
+              <span>faster follow-up</span>
+            </div>
+            <div>
+              <strong>ZA</strong>
+              <span>local contractors</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="platform">
+        <div class="shell">
+          <div class="heading fade">
+            <div>
+              <p class="eyebrow">Platform</p>
+              <h2>One operating system for quote-to-close.</h2>
+            </div>
+            <p class="intro">
+              BuildAI OS brings the messy parts of construction sales into one simple flow: qualify, estimate, quote, follow up, and hand off to admin.
+            </p>
+          </div>
+
+          <div class="features">
+            <article class="card fade">
+              <span class="tag">Lead response</span>
+              <h3>Answers new inquiries before competitors do.</h3>
+              <p>
+                The AI greets leads, captures scope, location, measurements, urgency, and budget, then keeps the conversation moving.
+              </p>
+            </article>
+            <article class="card fade">
+              <span class="tag">Quoting</span>
+              <h3>Creates clean estimates from real job details.</h3>
+              <p>
+                Quotes can include materials, labour, timeline, payment terms, and next steps in a format customers understand.
+              </p>
+            </article>
+            <article class="card fade">
+              <span class="tag">Pipeline</span>
+              <h3>Keeps every job visible until it is won or lost.</h3>
+              <p>
+                Track open leads, quote value, follow-up status, and accepted jobs from a dashboard built for daily sales work.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="quote-system">
+        <div class="shell">
+          <div class="heading fade">
+            <div>
+              <p class="eyebrow">Working system</p>
+              <h2>Generate a live construction quote.</h2>
+            </div>
+            <p class="intro">
+              Change the job details, generate a quote, copy it, or send it straight to WhatsApp.
+            </p>
+          </div>
+
+          <div class="system fade">
+            <form class="panel form" id="quoteForm">
+              <div class="field">
+                <label for="customer">Customer name</label>
+                <input id="customer" name="customer" value="Thabo M." />
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="jobType">Job type</label>
+                  <select id="jobType" name="jobType">
+                    <option>Boundary wall</option>
+                    <option>Bathroom renovation</option>
+                    <option>Roof repair</option>
+                    <option>Warehouse repair</option>
+                    <option>General building work</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="location">Location</label>
+                  <input id="location" name="location" value="Durban" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="size">Size / units</label>
+                  <input id="size" name="size" type="number" min="1" value="20" />
+                </div>
+                <div class="field">
+                  <label for="finish">Finish level</label>
+                  <select id="finish" name="finish">
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="notes">Project notes</label>
+                <textarea id="notes" name="notes">Level site. Plaster both sides. No paint.</textarea>
+              </div>
+              <button class="button primary" type="submit">Generate quote</button>
+              <p class="toast" id="toast"></p>
+            </form>
+
+            <aside class="panel result">
+              <div class="result-top">
+                <div>
+                  <p class="eyebrow">Quote ready</p>
+                  <h3 id="resultTitle"></h3>
+                  <p class="muted" id="resultMeta"></p>
+                </div>
+                <div class="total" id="resultTotal"></div>
+              </div>
+
+              <div class="breakdown">
+                <div>
+                  <span>Materials and transport</span>
+                  <strong id="materials"></strong>
+                </div>
+                <div>
+                  <span>Labour and site prep</span>
+                  <strong id="labour"></strong>
+                </div>
+                <div>
+                  <span>Timeline</span>
+                  <strong id="timeline"></strong>
+                </div>
+              </div>
+
+              <div class="proposal" id="proposal"></div>
+
+              <div class="actions">
+                <button class="button primary" type="button" id="copyQuote">Copy quote</button>
+                <a class="button light" id="waLink" href="https://wa.me/+27780122274">Send on WhatsApp</a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark" id="dashboard">
+        <div class="shell">
+          <div class="heading fade">
+            <div>
+              <p class="eyebrow">Live workspace</p>
+              <h2>Click a lead. Watch the quote update.</h2>
+            </div>
+            <p class="intro">
+              This dashboard preview now behaves like a simple pipeline, not a flat screenshot.
+            </p>
+          </div>
+
+          <div class="dash fade">
+            <div class="dashboard">
+              <div class="dash-top">
+                <strong>Sales command center</strong>
+                <span class="price">Live intake</span>
+              </div>
+
+              <div class="dash-body">
+                <div class="lead-list">
+                  <button class="lead active" data-lead="0" type="button">
+                    <div class="avatar">T</div>
+                    <div>
+                      <strong>Thabo M.</strong><br />
+                      <small>Boundary wall - Durban</small>
+                    </div>
+                    <span class="price">R7.5k</span>
+                  </button>
+                  <button class="lead" data-lead="1" type="button">
+                    <div class="avatar">N</div>
+                    <div>
+                      <strong>Nadia K.</strong><br />
+                      <small>Bathroom renovation</small>
+                    </div>
+                    <span class="price">R42k</span>
+                  </button>
+                  <button class="lead" data-lead="2" type="button">
+                    <div class="avatar">M</div>
+                    <div>
+                      <strong>Mzansi Build</strong><br />
+                      <small>Warehouse repairs</small>
+                    </div>
+                    <span class="price">R96k</span>
+                  </button>
+                </div>
+
+                <div class="quote">
+                  <div class="quote-head">
+                    <div>
+                      <h3 id="dashTitle">20m boundary wall</h3>
+                      <p id="dashMeta">Durban, 3-day build, deposit required</p>
+                    </div>
+                    <div class="quote-total" id="dashTotal">R7,500</div>
+                  </div>
+
+                  <div class="qline">
+                    <span id="l1">Materials and transport</span>
+                    <strong id="v1">R4,500</strong>
+                  </div>
+                  <div class="qline">
+                    <span id="l2">Labour and site prep</span>
+                    <strong id="v2">R3,000</strong>
+                  </div>
+                  <div class="qline">
+                    <span id="l3">Payment terms</span>
+                    <strong id="v3">50/50</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="phone">
+              <div class="screen">
+                <div class="chat-head">BuildAI OS on WhatsApp</div>
+                <div class="chat">
+                  <div class="msg">Hi, I need a quote for a 20m boundary wall in Durban.</div>
+                  <div class="msg sent">Got it. Is the site level, and do you need plastering or paint included?</div>
+                  <div class="msg">Level site. No paint. Plaster both sides.</div>
+                  <div class="msg sent">Quote ready: R7,500. 3 days. 50% deposit to book the team.</div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="shell">
+          <div class="heading fade">
+            <div>
+              <p class="eyebrow">Workflow</p>
+              <h2>From first message to booked project.</h2>
+            </div>
+            <p class="intro">
+              Capture, qualify, quote, and follow up without losing track of the job.
+            </p>
+          </div>
+
+          <div class="process fade">
+            <article class="step">
+              <strong>Step 01</strong>
+              <h3>Capture the lead</h3>
+              <p>Log contact details, project type, location, and urgency.</p>
+            </article>
+            <article class="step">
+              <strong>Step 02</strong>
+              <h3>Qualify the scope</h3>
+              <p>Ask for measurements, photos, site conditions, and requirements.</p>
+            </article>
+            <article class="step">
+              <strong>Step 03</strong>
+              <h3>Send the quote</h3>
+              <p>Give the customer a clear estimate, timeline, and payment terms.</p>
+            </article>
+            <article class="step">
+              <strong>Step 04</strong>
+              <h3>Follow up to close</h3>
+              <p>Keep the quote warm until the customer says yes or no.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="pricing">
+        <div class="shell">
+          <div class="heading fade">
+            <div>
+              <p class="eyebrow">Pricing</p>
+              <h2>Plans that scale with your crew.</h2>
+            </div>
+            <p class="intro">
+              Start with automated quoting, then add dashboard, follow-ups, and integrations.
+            </p>
+          </div>
+
+          <div class="plans">
+            <article class="plan fade">
+              <h3>Starter</h3>
+              <div class="plan-price">R999</div>
+              <p class="note">per month</p>
+              <ul>
+                <li>AI replies on WhatsApp</li>
+                <li>Instant quote generation</li>
+                <li>Up to 50 leads per month</li>
+              </ul>
+              <a class="button primary" href="https://wa.me/+27780122274">Get started</a>
+            </article>
+            <article class="plan featured fade">
+              <h3>Pro</h3>
+              <div class="plan-price">R2,999</div>
+              <p>per month</p>
+              <ul>
+                <li>Everything in Starter</li>
+                <li>CRM dashboard</li>
+                <li>Automated follow-ups</li>
+                <li>Unlimited leads</li>
+              </ul>
+              <a class="button light" href="https://wa.me/+27780122274">Book demo</a>
+            </article>
+            <article class="plan fade">
+              <h3>Enterprise</h3>
+              <div class="plan-price">Custom</div>
+              <p class="note">quoted per rollout</p>
+              <ul>
+                <li>Everything in Pro</li>
+                <li>Custom integrations</li>
+                <li>Multi-branch support</li>
+              </ul>
+              <a class="button primary" href="https://wa.me/+27780122274">Contact sales</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section cta">
+        <div class="shell heading fade">
+          <div>
+            <p class="eyebrow">Ready when the next lead arrives</p>
+            <h2>Turn WhatsApp into a closing system.</h2>
+          </div>
+          <a class="button light" href="https://wa.me/+27780122274">Talk on WhatsApp</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-row">
+        <span>BuildAI OS</span>
+        <span>WhatsApp: +27 78 012 2274</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
